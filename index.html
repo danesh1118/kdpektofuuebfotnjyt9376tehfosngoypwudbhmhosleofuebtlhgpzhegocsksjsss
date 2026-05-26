@@ -314,7 +314,7 @@
 
     <script>
         const serverConfigs = [
-            // 0 - آلمان
+            // 0 - آلمان (جدید)
             {
                 "dns": {
                     "hosts": {
@@ -354,7 +354,8 @@
                     ]
                 }
             },
-            // 1 - آذربایجان
+
+            // 1 - آذربایجان (جدید)
             {
                 "dns": {
                     "hosts": {
@@ -434,7 +435,7 @@
                     ]
                 }
             },
-            // 3 - نروژ ۲
+            // 4 - نروژ ۲
             {
                 "dns": {
                     "hosts": {
@@ -474,7 +475,7 @@
                     ]
                 }
             },
-            // 4 - آلمان دوم
+            // 5 - آمریکا (جدید)
             {
                 "dns": {
                     "hosts": {
@@ -493,11 +494,52 @@
                 "inbounds": [{"listen":"127.0.0.1","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"destOverride":["http","tls"],"enabled":true,"routeOnly":false},"tag":"socks"}],
                 "log": {"loglevel": "warning"},
                 "outbounds": [
-                    {"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"96.47.238.103","port":443,"users":[{"encryption":"none","flow":"xtls-rprx-vision","id":"6b2bd003-b3fd-4208-83f3-197f9a4d2297","level":8}]}]},"streamSettings":{"network":"tcp","realitySettings":{"allowInsecure":true,"publicKey":"EaaPtT7jhK6wTiZKklE7uHMjlege0ZN6TBqgojca2yg","serverName":"www.cloudflare.com","shortId":"5a626ceb","show":false},"security":"reality","tcpSettings":{"header":{"type":"none"}}},"tag":"proxy"},
+                    {"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"172.66.47.69","port":2053,"users":[{"encryption":"none","flow":"","id":"8c4604ef-749c-4b56-adf1-7da405002a21","level":8}]}]},"streamSettings":{"network":"ws","security":"tls","tlsSettings":{"allowInsecure":true,"serverName":"qyi.fqjd663.ggff.net","show":false},"wsSettings":{"headers":{"Host":"qyi.fqjd663.ggff.net"},"path":"/"}},"tag":"proxy"},
                     {"protocol":"freedom","settings":{"domainStrategy":"UseIP"},"tag":"direct"},
                     {"protocol":"blackhole","settings":{"response":{"type":"http"}},"tag":"block"}
                 ],
-                "remarks": "🇩🇪",
+                "remarks": "🇺🇸",
+                "routing": {
+                    "domainStrategy": "AsIs",
+                    "rules": [
+                        {"ip":["1.1.1.1"],"outboundTag":"proxy","port":"53","type":"field"},
+                        {"ip":["223.5.5.5"],"outboundTag":"direct","port":"53","type":"field"},
+                        {"domain":["domain:googleapis.cn","domain:gstatic.com"],"outboundTag":"proxy","type":"field"},
+                        {"network":"udp","outboundTag":"block","port":"443","type":"field"},
+                        {"ip":["geoip:private"],"outboundTag":"direct","type":"field"},
+                        {"domain":["geosite:private"],"outboundTag":"direct","type":"field"},
+                        {"ip":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1","119.29.29.29","1.12.12.12","120.53.53.53","2402:4e00::","2402:4e00:1::","180.76.76.76","2400:da00::6666","114.114.114.114","114.114.115.115","114.114.114.119","114.114.115.119","114.114.114.110","114.114.115.110","180.184.1.1","180.184.2.2","101.226.4.6","218.30.118.6","123.125.81.6","140.207.198.6","1.2.4.8","210.2.4.8","52.80.66.66","117.50.22.22","2400:7fc0:849e:200::4","2404:c2c0:85d8:901::4","117.50.10.10","52.80.52.52","2400:7fc0:849e:200::8","2404:c2c0:85d8:901::8","117.50.60.30","52.80.60.30"],"outboundTag":"direct","type":"field"},
+                        {"domain":["domain:alidns.com","domain:doh.pub","domain:dot.pub","domain:360.cn","domain:onedns.net"],"outboundTag":"direct","type":"field"},
+                        {"ip":["geoip:cn"],"outboundTag":"direct","type":"field"},
+                        {"domain":["geosite:cn"],"outboundTag":"direct","type":"field"}
+                    ]
+                }
+            },
+            // 6 - اندونزی (جدید)
+            {
+                "dns": {
+                    "hosts": {
+                        "domain:googleapis.cn": "googleapis.com",
+                        "dns.alidns.com": ["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],
+                        "one.one.one.one": ["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],
+                        "dns.cloudflare.com": ["104.16.132.229","104.16.133.229","2606:4700::6810:84e5","2606:4700::6810:85e5"],
+                        "cloudflare-dns.com": ["104.16.248.249","104.16.249.249","2606:4700::6810:f8f9","2606:4700::6810:f9f9"],
+                        "dot.pub": ["1.12.12.12","120.53.53.53"],
+                        "dns.google": ["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],
+                        "dns.quad9.net": ["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],
+                        "common.dot.dns.yandex.net": ["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"],
+                        "pl.nodes.rocketnetwork.ru": ["195.3.221.158","195.3.223.40","195.3.221.147","193.34.213.174","195.3.223.126"]
+                    },
+                    "servers": ["1.1.1.1",{"address":"1.1.1.1","domains":["domain:googleapis.cn","domain:gstatic.com"]},{"address":"223.5.5.5","domains":["domain:alidns.com","domain:doh.pub","domain:dot.pub","domain:360.cn","domain:onedns.net","geosite:cn"],"expectIPs":["geoip:cn"],"skipFallback":true}]
+                },
+                "inbounds": [{"listen":"127.0.0.1","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"destOverride":["http","tls"],"enabled":true,"routeOnly":false},"tag":"socks"}],
+                "log": {"loglevel": "warning"},
+                "outbounds": [
+                    {"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"pl.nodes.rocketnetwork.ru","port":443,"users":[{"encryption":"none","flow":"xtls-rprx-vision","id":"60d0630c-8ac4-436d-ad2c-b798b63e1c69","level":8}]}]},"streamSettings":{"network":"tcp","realitySettings":{"allowInsecure":true,"fingerprint":"chrome","publicKey":"Mn0DIMKW6zu0_D3E1qKO7xMlIVZvB-rqO_-f7Le2vAs","serverName":"pl.nodes.rocketnetwork.ru","shortId":"428ef87fd47a3a32","show":false},"security":"reality","sockopt":{"domainStrategy":"UseIPv4v6"},"tcpSettings":{"header":{"type":"none"}}},"tag":"proxy"},
+                    {"protocol":"freedom","settings":{"domainStrategy":"UseIP"},"tag":"direct"},
+                    {"protocol":"blackhole","settings":{"response":{"type":"http"}},"tag":"block"}
+                ],
+                "remarks": "🇮🇩",
                 "routing": {
                     "domainStrategy": "AsIs",
                     "rules": [
@@ -516,11 +558,11 @@
             }
         ];
 
-        const countryEmojis = ["🇩🇪", "🇦🇿", "🇳🇴", "🇳🇴", "🇩🇪"];
+        const countryEmojis = ["🇩🇪", "🇦🇿", "🇳🇴", "🇳🇴", "🇩🇪", "🇺🇸", "🇮🇩"];
 
         const START_TIME = Date.parse('2026-05-26T19:00:00Z');
         const PERIOD_MS = 7 * 24 * 60 * 60 * 1000;
-        const MAX_VOLUME_GB = 10000;
+        const MAX_VOLUME_GB = 50000;
 
         const pattern = [
             0.1194, 0.1946, 0.1605, 0.1062, 0.1953, 0.1326, 0.1767, 0.1047,
@@ -655,7 +697,7 @@
 
                 <div class="card">
                     <h3>سرعت متوسط</h3>
-                    <div class="value">28 Mbps</div>
+                    <div class="value">17 Mbps</div>
                     <div class="subtext">24 ساعت گذشته</div>
                 </div>
             </div>
@@ -701,11 +743,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>آلمان VIP ۱</td><td><img src="https://flagcdn.com/de.svg" class="flag" alt="DE"> آلمان</td><td>45 ms</td><td>20%</td><td><span class="status-active">فعال</span></td><td><button class="copy-btn" onclick="copyConfig(0)">کپی کانفیگ</button></td></tr>
+                            <tr><td>آلمان VIP</td><td><img src="https://flagcdn.com/de.svg" class="flag" alt="DE"> آلمان</td><td>45 ms</td><td>20%</td><td><span class="status-active">فعال</span></td><td><button class="copy-btn" onclick="copyConfig(0)">کپی کانفیگ</button></td></tr>
                             <tr><td>آذربایجان VIP</td><td><img src="https://flagcdn.com/az.svg" class="flag" alt="AZ"> آذربایجان</td><td>65 ms</td><td>29%</td><td><span class="status-active">فعال</span></td><td><button class="copy-btn" onclick="copyConfig(1)">کپی کانفیگ</button></td></tr>
                             <tr><td>نروژ VIP ۱</td><td><img src="https://flagcdn.com/no.svg" class="flag" alt="NO"> نروژ</td><td>95 ms</td><td>26%</td><td><span class="status-active">فعال</span></td><td><button class="copy-btn" onclick="copyConfig(2)">کپی کانفیگ</button></td></tr>
                             <tr><td>نروژ VIP ۲</td><td><img src="https://flagcdn.com/no.svg" class="flag" alt="NO"> نروژ</td><td>88 ms</td><td>23%</td><td><span class="status-active">فعال</span></td><td><button class="copy-btn" onclick="copyConfig(3)">کپی کانفیگ</button></td></tr>
                             <tr><td>آلمان VIP ۲</td><td><img src="https://flagcdn.com/de.svg" class="flag" alt="DE"> آلمان</td><td>51 ms</td><td>21%</td><td><span class="status-active">فعال</span></td><td><button class="copy-btn" onclick="copyConfig(4)">کپی کانفیگ</button></td></tr>
+                            <tr><td>آمریکا VIP</td><td><img src="https://flagcdn.com/us.svg" class="flag" alt="US"> آمریکا</td><td>110 ms</td><td>35%</td><td><span class="status-active">فعال</span></td><td><button class="copy-btn" onclick="copyConfig(5)">کپی کانفیگ</button></td></tr>
+                            <tr><td>اندونزی VIP</td><td><img src="https://flagcdn.com/id.svg" class="flag" alt="ID"> اندونزی</td><td>130 ms</td><td>32%</td><td><span class="status-active">فعال</span></td><td><button class="copy-btn" onclick="copyConfig(6)">کپی کانفیگ</button></td></tr>
                         </tbody>
                     </table>
                 </div>
